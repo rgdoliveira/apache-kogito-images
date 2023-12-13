@@ -3,18 +3,29 @@ import org.jenkinsci.plugins.workflow.libs.Library
 
 pipeline {
     agent {
-        docker { 
-            image env.AGENT_DOCKER_BUILDER_IMAGE
-            args env.AGENT_DOCKER_BUILDER_ARGS
-        }
+        label 'rhel8 && podman && !built-in'
+    }
+
+    // Needed for local build
+    tools {
+        maven env.BUILD_MAVEN_TOOL
+        jdk env.BUILD_JDK_TOOL
     }
 
     options {
         timeout(time: 120, unit: 'MINUTES')
     }
 
+    // parameters {
+    // For parameters, check into ./dsl/jobs.groovy file
+    // }
+
     environment {
+        // Static env is defined into ./dsl/jobs.groovy file
+
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
+
+        JAVA_HOME = "${GRAALVM_HOME}"
     }
 
     stages {
@@ -35,7 +46,7 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        versionCmd = "python scripts/manage-kogito-version.py --bump-to ${getKogitoVersion()} --confirm"
+                        versionCmd = "python3 scripts/manage-kogito-version.py --bump-to ${getKogitoVersion()} --confirm"
                         versionCmd += " --examples-ref nightly-${getBuildBranch()}"
                         if (getKogitoArtifactsVersion()) {
                             versionCmd += " --artifacts-version ${getKogitoArtifactsVersion()}"
@@ -87,7 +98,7 @@ pipeline {
                     dir(getRepoName()) {
                         if (githubscm.isThereAnyChanges()) {
                             githubscm.commitChanges("[${getBuildBranch()}] Update version to ${getKogitoVersion()}")
-                            githubscm.pushObject('origin', getBuildBranch(), getGitAuthorPushCredsId())
+                            githubscm.pushObject('origin', getBuildBranch(), getGitAuthorCredsID())
                         } else {
                             println '[WARN] no changes to commit'
                         }
@@ -117,7 +128,7 @@ void sendUnsuccessfulNotification() {
 void checkoutRepo(String repository, String branch) {
     dir(repository) {
         deleteDir()
-        checkout(githubscm.resolveRepository(repository, getGitAuthor(), branch, false, getGitAuthorCredsId()))
+        checkout(githubscm.resolveRepository(repository, getGitAuthor(), branch, false))
         sh "git checkout ${branch}"
     }
 }
@@ -138,12 +149,8 @@ String getGitAuthor() {
     return "${GIT_AUTHOR}"
 }
 
-String getGitAuthorCredsId() {
-    return "${GIT_AUTHOR_CREDS_ID}"
-}
-
-String getGitAuthorPushCredsId() {
-    return "${GIT_AUTHOR_PUSH_CREDS_ID}"
+String getGitAuthorCredsID() {
+    return "${AUTHOR_CREDS_ID}"
 }
 
 String getKogitoVersion() {
@@ -175,5 +182,5 @@ String getCleanedReleaseNotes() {
 }
 
 void runPythonCommand(String cmd, boolean stdout = false) {
-    return sh(returnStdout: stdout, script: cmd)
+    return util.runWithPythonVirtualEnv(cmd, 'cekit', stdout)
 }

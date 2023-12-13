@@ -5,22 +5,24 @@ deployProperties = [:]
 
 pipeline {
     agent {
-        docker { 
-            image env.AGENT_DOCKER_BUILDER_IMAGE
-            args env.AGENT_DOCKER_BUILDER_ARGS
-        }
+        label 'rhel8 && podman && !built-in'
     }
 
     options {
         timeout(time: 120, unit: 'MINUTES')
-        skipDefaultCheckout()
     }
+    // parameters {
+    // For parameters, check into ./dsl/jobs.groovy file
+    // }
 
     environment {
+        // Static env is defined into ./dsl/jobs.groovy file
+
         KOGITO_CI_EMAIL_TO = credentials("${JENKINS_EMAIL_CREDS_ID}")
 
-        CONTAINER_ENGINE = 'docker'
-        CONTAINER_ENGINE_TLS_OPTIONS = ''
+        // Linked to node label
+        CONTAINER_ENGINE = 'podman'
+        CONTAINER_ENGINE_TLS_OPTIONS = '--tls-verify=false'
 
         OPENSHIFT_API = credentials('OPENSHIFT_API')
         OPENSHIFT_REGISTRY = credentials('OPENSHIFT_REGISTRY')
@@ -33,10 +35,11 @@ pipeline {
         stage('Initialization') {
             steps {
                 script {
+                    clean()
+
                     if (params.DISPLAY_NAME) {
                         currentBuild.displayName = params.DISPLAY_NAME
                     }
-                    util.waitForDocker()
 
                     readDeployProperties()
 
@@ -60,6 +63,8 @@ pipeline {
                     dir(getRepoName()) {
                         checkoutRepo()
                     }
+
+                    cloud.installSkopeo()
                 }
             }
         }
@@ -81,8 +86,8 @@ pipeline {
                         // Merge PR
                         String prLink = getDeployProperty("${getRepoName()}.pr.link")
                         if (prLink) {
-                            githubscm.mergePR(prLink, getGitAuthorPushCredsId())
-                            githubscm.pushObject('origin', getBuildBranch(), getGitAuthorPushCredsId())
+                            githubscm.mergePR(prLink, getGitAuthorCredsID())
+                            githubscm.pushObject('origin', getBuildBranch(), getGitAuthorCredsID())
                         }
                     }
                 }
@@ -93,11 +98,11 @@ pipeline {
             steps {
                 script {
                     dir(getRepoName()) {
-                        if (githubscm.isReleaseExist(getGitTag(), getGitAuthorCredsId())) {
-                            githubscm.deleteReleaseAndTag(getGitTag(), getGitAuthorPushCredsId())
+                        if (githubscm.isReleaseExist(getGitTag(), getGitAuthorCredsID())) {
+                            githubscm.deleteReleaseAndTag(getGitTag(), getGitAuthorCredsID())
                         }
-                        githubscm.createReleaseWithGeneratedReleaseNotes(getGitTag(), getBuildBranch(), githubscm.getPreviousTagFromVersion(getGitTag()), getGitAuthorPushCredsId())
-                        githubscm.updateReleaseBody(getGitTag(), getGitAuthorPushCredsId())
+                        githubscm.createReleaseWithGeneratedReleaseNotes(getGitTag(), getBuildBranch(), githubscm.getPreviousTagFromVersion(getGitTag()), getGitAuthorCredsID())
+                        githubscm.updateReleaseBody(getGitTag(), getGitAuthorCredsID())
                     }
                 }
             }
@@ -133,9 +138,15 @@ String getNotificationSubject() {
 
 void checkoutRepo() {
     deleteDir()
-    checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false, getGitAuthorCredsId()))
+    checkout(githubscm.resolveRepository(getRepoName(), getGitAuthor(), getBuildBranch(), false))
     // need to manually checkout branch since on a detached branch after checkout command
     sh "git checkout ${getBuildBranch()}"
+}
+
+void clean() {
+    cleanWs()
+    util.cleanNode()
+    cloud.cleanSkopeo()
 }
 
 void promoteImages() {
@@ -270,12 +281,8 @@ String getGitAuthor() {
     return env.GIT_AUTHOR
 }
 
-String getGitAuthorCredsId() {
-    return env.GIT_AUTHOR_CREDS_ID
-}
-
-String getGitAuthorPushCredsId() {
-    return env.GIT_AUTHOR_PUSH_CREDS_ID
+String getGitAuthorCredsID() {
+    return env.AUTHOR_CREDS_ID
 }
 
 boolean isQuayRegistry(String registry) {
@@ -352,5 +359,5 @@ String[] getImages() {
 }
 
 void runPythonCommand(String cmd, boolean stdout = false) {
-    return sh(returnStdout: stdout, script: cmd)
+    return util.runWithPythonVirtualEnv(cmd, 'cekit', stdout)
 }
