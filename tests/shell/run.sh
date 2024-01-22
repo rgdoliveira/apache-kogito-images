@@ -1,4 +1,23 @@
 #!/usr/bin/env bash
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 set -e
 
 script_dir_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,7 +45,7 @@ echo "OUTPUT_DIR=${OUTPUT_DIR}"
 echo "TESTS_SCRIPT_DIR_PATH=${TESTS_SCRIPT_DIR_PATH}"
 
 if [ -d  "${script_dir_path}/${image_name}" ]; then
-  curl -Ls https://sh.jbang.dev | bash -s - "${TESTS_SCRIPT_DIR_PATH}/RunTests.java"
+  curl -Ls https://sh.jbang.dev | bash -s - "${TESTS_SCRIPT_DIR_PATH}/src/RunTests.java"
 else
   echo "No shell test to run for image ${image_name}"
 fi

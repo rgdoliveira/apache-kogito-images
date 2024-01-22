@@ -1,4 +1,23 @@
 #!/usr/bin/env bash
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 set -e
 
 script_dir_path="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
@@ -104,9 +123,11 @@ if [ "${SCRIPT_DEBUG^^}" = "TRUE" ]; then
     cat pom.xml
 fi
 
+# we force the dependencies download beforehand, so we won't have problems when running or building our apps in offline mode
+# see:
+#   https://quarkus.io/guides/maven-tooling#downloading-maven-artifact-dependencies-for-offline-development-and-testing
+#   https://maven.apache.org/plugins/maven-dependency-plugin/go-offline-mojo.html
 "${MAVEN_HOME}"/bin/mvn -B ${MAVEN_ARGS_APPEND} \
   -nsu \
   -s "${MAVEN_SETTINGS_PATH}" \
-  -DskipTests \
-  -Dquarkus.container-image.build=false \
-   clean install
+  clean dependency:go-offline io.quarkus.platform:quarkus-maven-plugin:"${QUARKUS_PLATFORM_VERSION}":go-offline

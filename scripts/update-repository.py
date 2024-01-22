@@ -1,4 +1,23 @@
 #!/usr/bin/env python
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 #Script responsible to update the tests with 
 #Should be run from root directory of the repository
 #Sample usage:  python scripts/update-tests.py
@@ -37,7 +56,6 @@ if __name__ == "__main__":
                         help='To update the runtime native image name in behave tests\'s steps')
 
     parser.add_argument('--tests-only', dest='tests_only', default=False, action='store_true', help='Update product modules/images')
-    parser.add_argument('--prod', default=False, action='store_true', help='Update product modules/images')
     args = parser.parse_args()
 
     if args.repo_url:
@@ -45,7 +63,7 @@ if __name__ == "__main__":
         common.update_maven_repo_in_setup_maven(args.repo_url, args.replace_default_repo)
         common.update_maven_repo_in_behave_tests(args.repo_url, args.replace_default_repo)
         if not args.tests_only:
-            common.update_maven_repo_env_value(args.repo_url, args.replace_default_repo, args.prod)
+            common.update_maven_repo_env_value(args.repo_url, args.replace_default_repo)
     
     if args.ignore_self_signed_cert:
         common.ignore_maven_self_signed_certificate_in_build_config()
@@ -68,11 +86,11 @@ if __name__ == "__main__":
         common.update_examples_ref_in_clone_repo(args.examples_ref)
 
     if args.artifacts_version:
-        common.update_artifacts_version_in_build(args.artifacts_version, args.prod)
+        common.update_artifacts_version_in_build(args.artifacts_version)
     
     if args.quarkus_platform_version:
         if not args.tests_only:
-            common.update_quarkus_platform_version_in_build(args.quarkus_platform_version, args.prod)
+            common.update_quarkus_platform_version_in_build(args.quarkus_platform_version)
         
         common.update_quarkus_platform_version_in_behave_tests_repository_paths(args.quarkus_platform_version)
     

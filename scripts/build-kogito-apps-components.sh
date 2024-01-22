@@ -1,4 +1,23 @@
 #!/usr/bin/env bash
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 # Parameters:
 #   1 - image name - can't  be empty.
 #   2 - git target branch - defaults to main
@@ -41,26 +60,11 @@ case ${imageName} in
     "kogito-data-index-ephemeral")
         contextDir="data-index/data-index-service/data-index-service-inmemory"
         ;;
-    "kogito-data-index-infinispan")
-        contextDir="data-index/data-index-service/data-index-service-infinispan"
-        ;;
-    "kogito-data-index-mongodb")
-        contextDir="data-index/data-index-service/data-index-service-mongodb"
-        ;;
-    "kogito-data-index-oracle")
-        contextDir="data-index/data-index-service/data-index-service-oracle"
-        ;;
     "kogito-data-index-postgresql")
         contextDir="data-index/data-index-service/data-index-service-postgresql"
         ;;
     "kogito-jobs-service-ephemeral")
         contextDir="jobs-service/jobs-service-inmemory"
-        ;;
-    "kogito-jobs-service-infinispan")
-        contextDir="jobs-service/jobs-service-infinispan"
-        ;;
-    "kogito-jobs-service-mongodb")
-        contextDir="jobs-service/jobs-service-mongodb"
         ;;
     "kogito-jobs-service-postgresql")
         contextDir="jobs-service/jobs-service-postgresql"
@@ -68,24 +72,7 @@ case ${imageName} in
     "kogito-jobs-service-allinone")
         extended_context="-all-in-one"
         contextDir="jobs-service/jobs-service-inmemory"
-        contextDir="${contextDir} jobs-service/jobs-service-infinispan"
         contextDir="${contextDir} jobs-service/jobs-service-postgresql"
-        contextDir="${contextDir} jobs-service/jobs-service-mongodb"
-        ;;
-    "kogito-trusty-infinispan")
-        contextDir="trusty/trusty-service/trusty-service-infinispan"
-        ;;
-    "kogito-trusty-postgresql")
-        contextDir="trusty/trusty-service/trusty-service-postgresql"
-        ;;
-    "kogito-trusty-redis")
-        contextDir="trusty/trusty-service/trusty-service-redis"
-        ;;
-    "kogito-trusty-ui")
-        contextDir="trusty-ui"
-        ;;
-    "kogito-explainability")
-        contextDir="explainability/explainability-service-messaging explainability/explainability-service-rest"
         ;;
     "kogito-jit-runner")
         contextDir="jitexecutor/jitexecutor-runner"

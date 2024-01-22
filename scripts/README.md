@@ -4,7 +4,6 @@ On this directory you can find some python scripts used to help with some repeti
 
 Today we have these scripts:
 
-- [build-product-image.sh](build-product-image.sh)
 - [common.py](common.py)
 - [list-images.py](list-images.py)
 - [manage-kogito-version.py](manage-kogito-version.py)
@@ -12,31 +11,6 @@ Today we have these scripts:
 - [push-staging.py](push-staging.py)
 - [run-bats.sh](run-bats.sh)
 - [update-repository.py](update-repository.py)
-
-
-
-### Build Product Image Script
-
-Script should not be used to build community images. Handled by `make build-prod` command.
-
-To switch the `build_engine` do the following:
-
-```bash
-make BUILD_ENGINE=osbs build-prod
-```
-
-
-It receives the Product image name to build the images.
-
-Example: 
-
-```bash 
-cekit --verbose --redhat --descriptor logic-data-index-ephemeral-rhel8-image.yaml build docker
-```
-
-The product image name must respect the community image name:
-
- - rhpam-$(kogito_image_name)-rhel8
 
 
 ### Common script
@@ -52,13 +26,6 @@ the community image list:
 ```bash
 $ python list-images.py
 ```
-
-And the product image list by using the `--prod` flag:
-
-```bash
-$ python list-images.py --prod
-```
-
 
 ### Managing Kogito images version script
 
@@ -191,10 +158,10 @@ This will set the default artifacts version.
 ##### Update quarkus version
 
 ```bash
-$ python update-repository.py --quarkus-platform-version 2.16.7.Final
+$ python update-repository.py --quarkus-platform-version 3.2.9.Final
 ```
 
-This will set the image quarkus version to 2.16.0.Final.
+This will set the image quarkus version to 3.2.9.Final.
 
 ##### Update Examples URI and Ref
 

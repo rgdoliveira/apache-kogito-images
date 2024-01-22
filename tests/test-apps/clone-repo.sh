@@ -1,17 +1,32 @@
 #!/usr/bin/env bash
 #
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+#
 # Clone the kogito-examples and edit the rules-quarkus-helloworld and dmn-quarkus-example for testing purposes
 # if image name is supporting services, don't build it
 IMAGE_NAME="$2"
 KOGITO_EXAMPLES_REPO_NAME='incubator-kie-kogito-examples'
 KOGITO_EXAMPLES_FOLDER_NAME='kogito-examples' # many tests rely on location /tmp/kogito-examples
 
-prod=""
 if [ -n "${IMAGE_NAME}" ]; then
-    if [[ ${IMAGE_NAME} =~ rhpam|logic* ]]; then
-        prod="--prod"
-    fi
-    if python ../../scripts/list-images.py ${prod} -is ${IMAGE_NAME}; then
+    if python ../../scripts/list-images.py -is ${IMAGE_NAME}; then
         echo "Target image is supporting services, skipping examples build"
         exit 0
     fi
@@ -20,6 +35,7 @@ fi
 set -e
 realPath="realpath"
 if [[ $OSTYPE == 'darwin'* ]]; then
+  # If you are on MacOS, use "brew install coreutils"
   realPath="grealpath"
 fi
 base_dir=`dirname $(${realPath} -s $0)`
@@ -43,7 +59,7 @@ git clone https://github.com/apache/${KOGITO_EXAMPLES_REPO_NAME}.git ${KOGITO_EX
 cd ${KOGITO_EXAMPLES_DIR}/
 git fetch origin
 git fetch origin --tags
-git checkout -b nightly-main
+git switch nightly-main
 
 # make a new copy of rules-quarkus-helloworld for native tests
 cp -rv  ${KOGITO_EXAMPLES_DIR}/kogito-quarkus-examples/rules-quarkus-helloworld/ ${KOGITO_EXAMPLES_DIR}/kogito-quarkus-examples/rules-quarkus-helloworld-native/
