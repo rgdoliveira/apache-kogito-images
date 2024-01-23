@@ -51,8 +51,9 @@ modules:
     - name: org.kie.kogito.openjdk
       version: "17"
     - name: org.kie.kogito.dynamic.resources
-    - name: org.kie.kogito.maven.rpm
-      version: "3.8"
+    - name: org.kie.kogito.maven
+      version: "3.9.3"
+    - name: org.kie.kogito.maven.common
     - name: org.kie.kogito.project.versions
     - name: org.kie.kogito.swf.common.scripts
     - name: org.kie.kogito.swf.devmode.runtime.common
