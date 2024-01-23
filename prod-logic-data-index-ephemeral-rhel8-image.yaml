@@ -19,7 +19,7 @@
 schema_version: 1
 
 name: "openshift-serverless-1-tech-preview/logic-data-index-ephemeral-rhel8"
-version: "1.30.0"
+version: "1.32.0"
 from: "registry.access.redhat.com/ubi8/ubi-minimal:latest"
 description: "Red Hat build of Runtime image for Kogito Data Index Service for ephemeral PostgreSQL persistence provider"
 
@@ -27,7 +27,7 @@ labels:
 - name: "com.redhat.component"
   value: "openshift-serverless-1-logic-data-index-ephemeral-rhel8-container"
 - name: "maintainer"
-  value: "Apache KIE <dev@kie.apache.org>"
+  value: "serverless-logic <bsig-cloud@redhat.com>"
 - name: "io.k8s.description"
   value: "Red Hat build of Runtime image for Kogito Data Index Service for ephemeral PostgreSQL persistence provider"
 - name: "io.k8s.display-name"
@@ -55,11 +55,11 @@ modules:
   - name: org.kie.kogito.system.user
   - name: org.kie.kogito.logging
   - name: org.kie.kogito.openjdk.headless
-    version: "11"
+    version: "17"
   - name: org.kie.kogito.dynamic.resources
   - name: org.kie.kogito.launch.scripts
   - name: org.kie.kogito.dataindex.prod.ephemeral
-    version: "1.30.0"
+    version: "1.32.0"
   - name: org.kie.kogito.dataindex.common
   - name: org.kie.kogito.security.custom.truststores
   - name: org.kie.kogito.pkg-update
@@ -81,7 +81,7 @@ osbs:
   extra_dir: osbs-extra/logic-data-index-ephemeral-rhel8
   repository:
     name: containers/openshift-serverless-1-logic-data-index-ephemeral
-    branch: openshift-serverless-1.30-rhel-8
+    branch: openshift-serverless-1.32-rhel-8
 
 ports:
   - value: 8080
