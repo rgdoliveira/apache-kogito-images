@@ -55,7 +55,7 @@ modules:
     - name: org.kie.kogito.openjdk
       version: "17"
     - name: org.kie.kogito.dynamic.resources
-    - name: org.kie.kogito.maven
+    - name: org.kie.kogito.maven.prod
       version: "3.9.3"
     - name: org.kie.kogito.maven.common
     - name: org.kie.kogito.project.versions
