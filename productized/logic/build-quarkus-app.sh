@@ -48,7 +48,7 @@ quarkus_extensions="quarkus-kubernetes,smallrye-health,org.kie.kogito:kogito-qua
 # dev mode purpose extensions used only by the kogito-swf-devmode
 kogito_swf_devmode_extensions="org.kie.kogito:kogito-quarkus-serverless-workflow-devui:${kogito_version},org.kie.kogito:kogito-addons-quarkus-source-files:${kogito_version},org.kie.kogito:kogito-addons-quarkus-process-management:${kogito_version},org.kie.kogito:kogito-addons-quarkus-jobs-service-embedded:${kogito_version},org.kie.kogito:kogito-addons-quarkus-data-index-inmemory:${kogito_version}"
 # builder/prod extensitons used only by the kogito-swf-builder
-kogito_swf_builder_extensions="org.kie.kogito:kogito-addons-quarkus-events-process:${kogito_version},org.kie.kogito:kogito-addons-quarkus-process-management:${kogito_version},org.kie.kogito:kogito-addons-quarkus-source-files:${kogito_version}"
+kogito_swf_builder_extensions="org.kie.kogito:kogito-addons-quarkus-events-process:${kogito_version},org.kie.kogito:kogito-addons-quarkus-process-management:${kogito_version},org.kie.kogito:kogito-addons-quarkus-source-files:${kogito_version},org.kie.kogito:kogito-addons-quarkus-jobs-knative-eventing:${kogito_version}"
 
 if [ -z ${quarkus_platform_version} ]; then
     echo "Please provide the quarkus version"
