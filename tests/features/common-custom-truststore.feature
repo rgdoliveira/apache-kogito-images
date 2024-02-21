@@ -6,6 +6,7 @@
 @quay.io/kiegroup/kogito-jit-runner 
 @quay.io/kiegroup/kogito-jobs-service-ephemeral
 @quay.io/kiegroup/kogito-jobs-service-postgresql
+@openshift-serverless-1-tech-preview/logic-data-index-ephemeral-rhel8
 Feature: Common tests for Custom TrustStore configuration
   # This test sets an invalid certificate to the container, it fails to start, and if timing is bad cekit hangs on 'Running command ps -C java in container'
   # See https://github.com/apache/incubator-kie-kogito-images/issues/1722
