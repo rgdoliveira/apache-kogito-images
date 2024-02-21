@@ -10,6 +10,7 @@
 @quay.io/kiegroup/kogito-task-console
 @quay.io/kiegroup/kogito-swf-builder
 @quay.io/kiegroup/kogito-base-builder
+@openshift-serverless-1-tech-preview/logic-data-index-ephemeral-rhel8
 Feature: Common tests for Kogito images
 
   Scenario: Verify if Kogito user is correctly configured
