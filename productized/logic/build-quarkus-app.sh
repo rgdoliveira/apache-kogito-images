@@ -36,13 +36,13 @@ quarkus_platform_version="${3}"
 kogito_version="${KOGITO_VERSION:-${4}}"
 
 # GAV of maven plugins to be injected in the plugin management section
-maven_plugins_gav=("org.apache.maven.plugins:maven-resources-plugin:3.3.1" "org.apache.maven.plugins:maven-install-plugin:3.1.1" "org.apache.maven.plugins:maven-jar-plugin:3.3.0" "org.apache.maven.plugins:maven-clean-plugin:3.3.1")
+maven_plugins_gav=("org.apache.maven.plugins:maven-resources-plugin:3.3.1" "org.apache.maven.plugins:maven-install-plugin:3.1.1" "org.apache.maven.plugins:maven-jar-plugin:3.3.0" "org.apache.maven.plugins:maven-clean-plugin:3.3.1" "org.apache.maven.plugins:maven-deploy-plugin:3.1.1" "org.apache.maven.plugins:maven-site-plugin:3.12.1")
 
 # Properties to be replaced in the pom by the new versions
 properties_with_versions=("compiler-plugin.version:3.11.0" "surefire-plugin.version:3.1.2")
 
 # extra dependencies required for offline mode
-quarkus_extensions_extra_deps="com.aayushatharva.brotli4j:native-linux-aarch64:1.12.0,org.apache.maven.plugins:maven-deploy-plugin:3.1.1,org.apache.maven.plugins:maven-site-plugin:3.12.1"
+quarkus_extensions_extra_deps="com.aayushatharva.brotli4j:native-linux-aarch64:1.12.0"
 # common extensions used by the kogito-swf-builder and kogito-swf-devmode
 quarkus_extensions="quarkus-kubernetes,smallrye-health,org.kie.kogito:kogito-quarkus-serverless-workflow:${kogito_version},org.kie.kogito:kogito-addons-quarkus-knative-eventing:${kogito_version},org.kie.kogito:kogito-addons-quarkus-microprofile-config-service-catalog:${kogito_version},org.kie.kogito:kogito-addons-quarkus-kubernetes:${kogito_version},org.kie.kogito:kogito-addons-quarkus-knative-serving:${kogito_version}"
 # dev mode purpose extensions used only by the kogito-swf-devmode
@@ -185,7 +185,7 @@ mvn ${MAVEN_OPTIONS} \
     -DskipTests \
     -Dmaven.repo.local=${mvn_local_repo} \
     -Dquarkus.container-image.build=false \
-    clean install
+    clean install dependency:go-offline "${quarkus_platform_groupid}":quarkus-maven-plugin:"${quarkus_platform_version}":go-offline
 
 cd ${build_target_dir}
 
