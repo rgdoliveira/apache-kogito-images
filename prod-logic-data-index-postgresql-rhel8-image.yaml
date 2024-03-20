@@ -18,7 +18,7 @@
 #
 schema_version: 1
 
-name: "openshift-serverless-1-tech-preview/logic-data-index-postgresql-rhel8"
+name: "openshift-serverless-1/logic-data-index-postgresql-rhel8"
 version: "1.32.0"
 from: "registry.access.redhat.com/ubi8/ubi-minimal:latest"
 description: "Red Hat build of Runtime image for Kogito Data Index Service for PostgreSQL persistence provider"
