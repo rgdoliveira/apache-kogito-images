@@ -17,7 +17,7 @@
 # under the License.
 #
 schema_version: 1
-name: "openshift-serverless-1-tech-preview/logic-swf-devmode-rhel8"
+name: "openshift-serverless-1/logic-swf-devmode-rhel8"
 from: "registry.access.redhat.com/ubi8/ubi-minimal:latest"
 version: "1.32.0"
 description: "Red Hat build of Kogito Serverless Workflow development mode image with Quarkus extensions libraries preinstalled"
