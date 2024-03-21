@@ -48,6 +48,69 @@ items:
   - kind: ImageStream
     apiVersion: v1
     metadata:
+      name: logic-data-index-postgresql-rhel8
+      annotations:
+        openshift.io/display-name: Red Hat build of Runtime image for SonataFlow Data Index Service for PostgreSQL persistence provider
+        openshift.io/provider-display-name: Kie Group
+    spec:
+      tags:
+      - name: '1.32.0'
+        annotations:
+          description: Red Hat build of SonataFlow Data Index Service with PostgreSQL
+          iconClass: icon-jbpm
+          tags: logic-data-index,sonataflow,data-index,data-index-postgresql
+          supports: quarkus
+          version: '1.32.0'
+        referencePolicy:
+          type: Local
+        from:
+          kind: DockerImage
+          name: registry.redhat.io/openshift-serverless-1/logic-data-index-postgresql-rhel8:1.32.0
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
+      name: logic-jobs-service-ephemeral-rhel8
+      annotations:
+        openshift.io/display-name: Red Hat build of Runtime image for SonataFlow in memory Jobs Service
+        openshift.io/provider-display-name: Kie Group
+    spec:
+      tags:
+      - name: '1.32.0'
+        annotations:
+          description: Red Hat build of Runtime image for SonataFlow in memory Jobs Service
+          iconClass: icon-jbpm
+          tags: logic-jobs-service,sonataflow,jobs-service,jobs-service-ephemeral
+          supports: quarkus
+          version: '1.32.0'
+        referencePolicy:
+          type: Local
+        from:
+          kind: DockerImage
+          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-ephemeral-rhel8:1.32.0
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
+      name: logic-jobs-service-postgresql-rhel8
+      annotations:
+        openshift.io/display-name: Red Hat build of Runtime image for SonataFlow Jobs Service based on Postgresql
+        openshift.io/provider-display-name: Kie Group
+    spec:
+      tags:
+      - name: '1.32.0'
+        annotations:
+          description: Red Hat build of Runtime image for SonataFlow Jobs Service based on Postgresql
+          iconClass: icon-jbpm
+          tags: logic-jobs-service,sonataflow,jobs-service,jobs-service-postgresql
+          supports: quarkus
+          version: '1.32.0'
+        referencePolicy:
+          type: Local
+        from:
+          kind: DockerImage
+          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-postgresql-rhel8:1.32.0
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
       name: logic-devmode
       annotations:
         openshift.io/display-name: Red Hat build of SonataFlow development mode image with Quarkus extensions libraries preinstalled.
