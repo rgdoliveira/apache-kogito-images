@@ -21,9 +21,9 @@ name: org.kie.kogito.jobs.service.prod.ephemeral
 version: "1.32.0"
 
 artifacts:
-  # jobs-service-inmemory-9.99.0.redhat-00004-image-build.zip
+  # jobs-service-inmemory-999-20240325.022019-1-image-build.zip
   - name: jobs-service-inmemory-image-build.zip
-    md5: d6623dc66609ea631276cbbf0bbefdf3
+    md5: df0e56b2f6da3822abd1ef1c26b1627c
 
 packages:
   install:

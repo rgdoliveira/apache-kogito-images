@@ -21,9 +21,9 @@ name: org.kie.kogito.jobs.service.prod.postgresql
 version: "1.32.0"
 
 artifacts:
-  # jobs-service-postgresql-9.99.0.redhat-00004-image-build.zip
+  # jobs-service-postgresql-999-20240325.022019-1-image-build.zip
   - name: jobs-service-postgresql-image-build.zip
-    md5: 8c10d22ae4f513b73f096a99d32435c8
+    md5: bb025414c668d911abb0c48168d9b1a1
 
 execute:
   - script: configure

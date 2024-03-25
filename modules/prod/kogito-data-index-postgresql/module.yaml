@@ -21,9 +21,9 @@ name: org.kie.kogito.dataindex.prod.postgresql
 version: "1.32.0"
 
 artifacts:
-  # data-index-service-postgresql-9.99.0.redhat-00004-image-build.zip
+  # data-index-service-postgresql-999-20240325.022019-1-image-build.zip
   - name: data-index-service-postgresql-image-build.zip
-    md5: 111fc260641ce3f77a8a09d657ae96e9
+    md5: 70c5c2ac0c0da585ede3f154b130e1a0
 
 execute:
   - script: configure
