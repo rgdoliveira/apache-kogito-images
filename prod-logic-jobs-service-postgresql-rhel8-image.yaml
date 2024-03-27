@@ -20,7 +20,7 @@ schema_version: 1
 
 name: "openshift-serverless-1/logic-jobs-service-postgresql-rhel8"
 version: "1.32.0"
-from: "registry.access.redhat.com/ubi8/ubi-minimal:latest"
+from: "registry.access.redhat.com/ubi8/openjdk-17:latest"
 description: "Red Hat build of Runtime image for Kogito Jobs Service based on Postgresql"
 
 labels:
@@ -54,8 +54,6 @@ modules:
     - name: org.kie.kogito.image.dependencies
     - name: org.kie.kogito.system.user
     - name: org.kie.kogito.logging
-    - name: org.kie.kogito.openjdk.headless
-      version: "17"
     - name: org.kie.kogito.dynamic.resources
     - name: org.kie.kogito.launch.scripts
     - name: org.kie.kogito.jobs.service.prod.postgresql
