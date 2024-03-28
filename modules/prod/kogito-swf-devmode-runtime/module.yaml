@@ -43,11 +43,11 @@ envs:
 
 artifacts:
   - name: kogito-devmode-quarkus-app-image-build.zip
-    # kogito-devmode-quarkus-app-1.44.0.Final-redhat-00005-image-build.zip
-    md5: af446cec2a7da68c1d1565b7a804e50c
+    # kogito-devmode-quarkus-app-9.99.0.redhat-00007-image-build.zip
+    md5: 0d92c633d5fef7990a93f25655cc1fbc
   - name: kogito-devmode-maven-repository-image-build.zip
-    # kogito-devmode-maven-repository-1.44.0.Final-redhat-00005-image-build.zip
-    md5: 8d8bf6b104da6b6dc0dd81c415231c39
+    # kogito-devmode-maven-repository-9.99.0.redhat-00007-image-build.zip
+    md5: 3a183121b8335f81a4ef3937f67c3d28
 
 execute:
   - script: configure.sh

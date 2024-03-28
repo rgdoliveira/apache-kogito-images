@@ -18,13 +18,13 @@
 #
 schema_version: 1
 name: "openshift-serverless-1/logic-swf-devmode-rhel8"
-from: "registry.access.redhat.com/ubi8/ubi-minimal:latest"
+from: "registry.access.redhat.com/ubi8/openjdk-17:latest"
 version: "1.32.0"
 description: "Red Hat build of Kogito Serverless Workflow development mode image with Quarkus extensions libraries preinstalled"
 
 labels:
   - name: "io.quarkus.platform.version"
-    value: "3.2.9.Final"
+    value: "3.2.10.Final"
   - name: "org.kie.kogito.version"
     value: "999-SNAPSHOT"
   - name: "io.k8s.description"
@@ -48,8 +48,6 @@ modules:
     - name: org.kie.kogito.system.user
     - name: org.kie.kogito.logging
     - name: org.kie.kogito.launch.scripts
-    - name: org.kie.kogito.openjdk
-      version: "17"
     - name: org.kie.kogito.dynamic.resources
     - name: org.kie.kogito.maven.prod
       version: "3.9.3"

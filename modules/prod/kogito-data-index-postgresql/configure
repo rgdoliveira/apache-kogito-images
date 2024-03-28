@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -16,18 +17,15 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-schema_version: 1
-name: org.kie.kogito.swf.builder.runtime.osl
-version: "1.32.0"
-description: "OpenShift Serverless Logic builder module with required extensions"
+set -e
 
-artifacts:
-  - name: kogito-builder-quarkus-app-image-build.zip
-    # kogito-builder-quarkus-app-9.99.0.redhat-00007-image-build.zip
-    md5: 7080ff7e7107be30c1dd1325768131f6
-  - name: kogito-builder-maven-repository-image-build.zip
-    # kogito-builder-maven-repository-9.99.0.redhat-00007-image-build.zip
-    md5: df1b66a53f8238b130f6ab1839ad72bd
+SOURCES_DIR=/tmp/artifacts
+SCRIPT_DIR=$(dirname "${0}")
+ADDED_DIR="${SCRIPT_DIR}"/added
 
-execute:
-  - script: configure.sh
+mkdir -p "${KOGITO_HOME}"/bin/quarkus-app
+unzip "${SOURCES_DIR}"/data-index-service-postgresql-image-build.zip -d "${KOGITO_HOME}"/bin/quarkus-app/
+
+cp -v "${ADDED_DIR}"/kogito-app-launch.sh "${KOGITO_HOME}"
+chmod +x-w "${KOGITO_HOME}"/kogito-app-launch.sh
+

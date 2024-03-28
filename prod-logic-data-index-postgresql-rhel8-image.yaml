@@ -17,32 +17,33 @@
 # under the License.
 #
 schema_version: 1
-name: "openshift-serverless-1/logic-swf-builder-rhel8"
+
+name: "openshift-serverless-1/logic-data-index-postgresql-rhel8"
 version: "1.32.0"
 from: "registry.access.redhat.com/ubi8/openjdk-17:latest"
-description: "Red Hat build of Runtime image for Kogito Serverless Workflow builder with Quarkus extensions libraries preinstalled"
+description: "Red Hat build of Runtime image for Kogito Data Index Service for PostgreSQL persistence provider"
+
 
 labels:
-  - name: "io.openshift.s2i.scripts-url"
-    value: "image:///usr/local/s2i"
-  - name: "io.openshift.s2i.destination"
-    value: "/tmp"
-  - name: "io.quarkus.platform.version"
-    value: "3.2.10.Final"
-  - name: "org.kie.kogito.version"
-    value: "999-SNAPSHOT"
   - name: "com.redhat.component"
-    value: "openshift-serverless-1-logic-swf-builder-rhel8-container"
+    value: "openshift-serverless-1-logic-data-index-postgresql-rhel8-container"
   - name: "maintainer"
     value: "serverless-logic <bsig-cloud@redhat.com>"
   - name: "io.k8s.description"
-    value: "Red Hat build of Runtime image for Kogito Serverless Workflow builder with Quarkus extensions libraries preinstalled"
+    value: "Red Hat build of Runtime image for Kogito Data Index Service for PostgreSQL persistence provider"
   - name: "io.k8s.display-name"
-    value: "Red Hat OpenShift Serverless Logic Builder image"
+    value: "Red Hat build of Kogito Data Index Service - PostgreSQL"
   - name: "io.openshift.tags"
-    value: "logic-swf-builder,kogito,swf-builder"
+    value: "logic-data-index,kogito,data-index,data-index-postgresql"
   - name: "io.openshift.expose-services"
     value: "8080:http"
+  - name: "org.kie.kogito.version"
+    value: "999-SNAPSHOT"
+
+envs:
+  - name: "SCRIPT_DEBUG"
+    example: "true"
+    description: "If set to true, ensures that the bash scripts are executed with the -x option, printing the commands and their arguments as they are executed. Also debug JVM initialization."
 
 modules:
   repositories:
@@ -51,23 +52,13 @@ modules:
     - name: org.kie.kogito.image.dependencies
     - name: org.kie.kogito.system.user
     - name: org.kie.kogito.logging
-    - name: org.kie.kogito.launch.scripts
     - name: org.kie.kogito.dynamic.resources
-    - name: org.kie.kogito.maven.prod
-      version: "3.9.3"
-    - name: org.kie.kogito.maven.common
-    - name: org.kie.kogito.project.versions
-    - name: org.kie.kogito.swf.common.scripts
-    - name: org.kie.kogito.swf.builder.runtime.osl
+    - name: org.kie.kogito.launch.scripts
+    - name: org.kie.kogito.dataindex.prod.postgresql
       version: "1.32.0"
-
-run:
-  workdir: "/home/kogito/${PROJECT_ARTIFACT_ID}"
-  user: 1001
-
-ports:
-  - value: 8080
-  - value: 5005
+    - name: org.kie.kogito.dataindex.common
+    - name: org.kie.kogito.security.custom.truststores
+    - name: org.kie.kogito.pkg-update
 
 packages:
   manager: microdnf
@@ -78,12 +69,22 @@ osbs:
     container:
       platforms:
         only:
-          - x86_64
-          - ppc64le
-          - aarch64
+        - x86_64
+        - aarch64
+        - ppc64le
       compose:
         pulp_repos: true
-  extra_dir: osbs-extra/logic-swf-builder-rhel8
+  extra_dir: osbs-extra/logic-data-index-postgresql-rhel8
   repository:
-    name: containers/openshift-serverless-1-logic-swf-builder
+    name: containers/openshift-serverless-1-logic-data-index-postgresql
     branch: openshift-serverless-1.32-rhel-8
+
+ports:
+  - value: 8080
+
+run:
+  workdir: "/home/kogito"
+  user: 1001
+  cmd:
+    - "/home/kogito/kogito-app-launch.sh"
+

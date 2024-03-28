@@ -17,17 +17,17 @@
 # under the License.
 #
 schema_version: 1
-name: org.kie.kogito.swf.builder.runtime.osl
+name: org.kie.kogito.jobs.service.prod.ephemeral
 version: "1.32.0"
-description: "OpenShift Serverless Logic builder module with required extensions"
 
 artifacts:
-  - name: kogito-builder-quarkus-app-image-build.zip
-    # kogito-builder-quarkus-app-9.99.0.redhat-00007-image-build.zip
-    md5: 7080ff7e7107be30c1dd1325768131f6
-  - name: kogito-builder-maven-repository-image-build.zip
-    # kogito-builder-maven-repository-9.99.0.redhat-00007-image-build.zip
-    md5: df1b66a53f8238b130f6ab1839ad72bd
+  # jobs-service-inmemory-999-20240325.022019-1-image-build.zip
+  - name: jobs-service-inmemory-image-build.zip
+    md5: df0e56b2f6da3822abd1ef1c26b1627c
+
+packages:
+  install:
+    - pam
 
 execute:
-  - script: configure.sh
+  - script: configure
