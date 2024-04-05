@@ -172,7 +172,6 @@ pipeline {
                     // Debug purpose in case of issue
                     sh 'cat tests/test-apps/clone-repo.sh'
                     sh 'cat scripts/setup-maven.sh'
-                    sh 'cat tests/features/kogito-s2i-builder.feature'
                 }
             }
         }
