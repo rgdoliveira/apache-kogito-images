@@ -18,7 +18,7 @@
 #
 schema_version: 1
 name: org.kie.kogito.dataindex.prod.postgresql
-version: "1.32.0"
+version: "1.33.0"
 
 artifacts:
   # data-index-service-postgresql-999-20240325.022019-1-image-build.zip
