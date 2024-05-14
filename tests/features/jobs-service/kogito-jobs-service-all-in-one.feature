@@ -6,7 +6,7 @@ Feature: Kogito-jobs-service-all-in-one feature.
     Then the image should contain label maintainer with value serverless-logic <bsig-cloud@redhat.com>
     And the image should contain label io.openshift.expose-services with value 8080:http
     And the image should contain label io.k8s.description with value Red Hat build of Runtime image for Kogito Jobs Service with all available jdbc providers
-    And the image should contain label io.k8s.display-name with value Kogito Jobs Service All-in-One
+    And the image should contain label io.k8s.display-name with value Red Hat build of Kogito Jobs Service All-in-One
     And the image should contain label io.openshift.tags with value kogito,jobs-service,postgresql,ephemeral
 
   Scenario: Verify if all jobs-service flavors are in the image
