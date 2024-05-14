@@ -5,7 +5,7 @@ Feature: Kogito-jobs-service-postgresql feature.
     Given image is built
     Then the image should contain label maintainer with value serverless-logic <bsig-cloud@redhat.com>
     And the image should contain label io.openshift.expose-services with value 8080:http
-    And the image should contain label io.k8s.description with value Runtime image for Kogito Jobs Service based on Postgresql
+    And the image should contain label io.k8s.description with value Red Hat build of Runtime image for Kogito Jobs Service based on Postgresql
     And the image should contain label io.k8s.display-name with value Kogito Jobs Service based on Postgresql
     And the image should contain label io.openshift.tags with value kogito,jobs-service-postgresql
 
