@@ -7,7 +7,7 @@ Feature: Kogito-data-index postgresql feature.
       And the image should contain label io.openshift.expose-services with value 8080:http
       And the image should contain label io.k8s.description with value Red Hat build of Runtime image for Kogito Data Index Service for PostgreSQL persistence provider
       And the image should contain label io.k8s.display-name with value Red Hat build of Kogito Data Index Service - PostgreSQL
-      And the image should contain label io.openshift.tags with value kogito,data-index,data-index-postgresql
+      And the image should contain label io.openshift.tags with value logic-data-index,kogito,data-index,data-index-postgresql
 
   Scenario: check if the default quarkus profile is correctly set on data index
     When container is started with env
