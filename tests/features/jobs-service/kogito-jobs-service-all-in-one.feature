@@ -7,7 +7,7 @@ Feature: Kogito-jobs-service-all-in-one feature.
     And the image should contain label io.openshift.expose-services with value 8080:http
     And the image should contain label io.k8s.description with value Red Hat build of Runtime image for Kogito Jobs Service with all available jdbc providers
     And the image should contain label io.k8s.display-name with value Red Hat build of Kogito Jobs Service All-in-One
-    And the image should contain label io.openshift.tags with value logic-job-service,kogito,jobs-service,postgresql,ephemeral
+    And the image should contain label io.openshift.tags with value logic-jobs-service,kogito,jobs-service,postgresql,ephemeral
 
   Scenario: Verify if all jobs-service flavors are in the image
     When container is started with command bash
