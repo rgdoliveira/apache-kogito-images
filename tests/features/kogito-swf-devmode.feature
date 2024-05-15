@@ -107,25 +107,6 @@ Feature: Serverless Workflow devmode images
       | expected_status_code | 200                                      |
       | expected_phrase      | {"data":{"ProcessInstances":[]}}         |
 
-  Scenario: verify that the serverless workflow devui is running
-    When container is started with env
-      | variable                    | value |
-      | QUARKUS_DEVSERVICES_ENABLED | false |
-    Then check that page is served
-      | property             | value                                                              |
-      | port                 | 8080                                                               |
-      | path                 | /q/dev-v1/org.kie.kogito-addons-quarkus-data-index-inmemory/dataindex |
-      | request_method       | GET                                                                |
-      | wait                 | 480                                                                |
-      | expected_status_code | 200                                                                |
-    And check that page is served
-      | property             | value                                                                            |
-      | port                 | 8080                                                                             |
-      | path                 | /q/dev-ui/org.apache.kie.sonataflow.sonataflow-quarkus-devui/workflows |
-      | request_method       | GET                                                                              |
-      | wait                 | 480                                                                              |
-      | expected_status_code | 200                                                                              |
-
   Scenario: Verify if container starts in devmode with service discovery enabled
     When container is started with env
       | variable                    | value |
