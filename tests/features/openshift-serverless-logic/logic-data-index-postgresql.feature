@@ -1,8 +1,7 @@
-@quay.io/kiegroup/kogito-data-index-postgresql
 @openshift-serverless-1/logic-data-index-postgresql-rhel8
-Feature: Kogito-data-index postgresql feature.
+Feature: logic-data-index-postgresql postgresql feature.
 
-  Scenario: verify if all labels are correctly set on kogito-data-index-postgresql image
+  Scenario: verify if all labels are correctly set on logic-data-index-postgresql image
     Given image is built
      Then the image should contain label maintainer with value serverless-logic <bsig-cloud@redhat.com>
       And the image should contain label io.openshift.expose-services with value 8080:http

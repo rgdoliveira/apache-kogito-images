@@ -1,8 +1,7 @@
-@quay.io/kiegroup/kogito-jobs-service-ephemeral
 @openshift-serverless-1/logic-jobs-service-ephemeral-rhel8
-Feature: Kogito-jobs-service-ephemeral feature.
+Feature: logic-jobs-service-ephemeral feature.
 
-  Scenario: verify if all labels are correctly set kogito-jobs-service image image
+  Scenario: verify if all labels are correctly set logic-jobs-service-ephemeral image
     Given image is built
     Then the image should contain label maintainer with value serverless-logic <bsig-cloud@redhat.com>
     And the image should contain label io.openshift.expose-services with value 8080:http
