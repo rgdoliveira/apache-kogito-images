@@ -1,3 +1,22 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
 IMAGE_VERSION := $(shell python scripts/retrieve_version.py)
 SHORTENED_LATEST_VERSION := $(shell echo $(IMAGE_VERSION) | awk -F. '{print $$1"."$$2}')
 KOGITO_APPS_TARGET_BRANCH ?= main
@@ -46,13 +65,13 @@ endif
 # tag with shortened version
 ifneq ($(ignore_tag),true)
     ifneq ($(findstring rc,$(IMAGE_VERSION)),rc)
-	    ${BUILD_ENGINE} tag quay.io/kiegroup/${image_name}:${IMAGE_VERSION} quay.io/kiegroup/${image_name}:${SHORTENED_LATEST_VERSION}
+	    ${BUILD_ENGINE} tag docker.io/apache/incubator-kie-${image_name}:${IMAGE_VERSION} docker.io/apache/incubator-kie-${image_name}:${SHORTENED_LATEST_VERSION}
     endif
 endif
 # if ignore_test is set to true, ignore the tests
 ifneq ($(ignore_test),true)
 	${CEKIT_CMD} --descriptor ${image_name}-image.yaml test behave ${test_options}
-	tests/shell/run.sh ${image_name} "quay.io/kiegroup/${image_name}:${SHORTENED_LATEST_VERSION}"
+	tests/shell/run.sh ${image_name} "docker.io/apache/incubator-kie-${image_name}:${SHORTENED_LATEST_VERSION}"
 endif
 
 
@@ -66,11 +85,11 @@ _push:
 .PHONY: push-image
 image_name=
 push-image:
-	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push quay.io/kiegroup/${image_name}:${IMAGE_VERSION}
-	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push quay.io/kiegroup/${image_name}:latest
+	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push docker.io/apache/incubator-kie-${image_name}:${IMAGE_VERSION}
+	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push docker.io/apache/incubator-kie-${image_name}:latest
 ifneq ($(findstring rc,$(IMAGE_VERSION)), rc)
 	@echo "${SHORTENED_LATEST_VERSION} will be pushed"
-	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push quay.io/kiegroup/${image_name}:${SHORTENED_LATEST_VERSION}
+	${BUILD_ENGINE} ${BUILD_ENGINE_TLS_OPTIONS} push docker.io/apache/incubator-kie-${image_name}:${SHORTENED_LATEST_VERSION}
 endif
 
 
