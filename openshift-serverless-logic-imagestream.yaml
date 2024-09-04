@@ -33,18 +33,18 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-      - name: '1.33.0'
+      - name: '1.34.0'
         annotations:
           description: Red Hat build of SonataFlow Data Index Service - ephemeral PostgreSQL
           iconClass: icon-jbpm
           tags: logic-data-index,sonataflow,data-index,data-index-ephemeral
           supports: quarkus
-          version: '1.33.0'
+          version: '1.34.0'
         referencePolicy:
           type: Local
         from:
           kind: DockerImage
-          name: registry.redhat.io/openshift-serverless-1/logic-data-index-ephemeral-rhel8:1.33.0
+          name: registry.redhat.io/openshift-serverless-1/logic-data-index-ephemeral-rhel8:1.34.0
   - kind: ImageStream
     apiVersion: v1
     metadata:
@@ -54,18 +54,18 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-      - name: '1.33.0'
+      - name: '1.34.0'
         annotations:
           description: Red Hat build of SonataFlow Data Index Service with PostgreSQL
           iconClass: icon-jbpm
           tags: logic-data-index,sonataflow,data-index,data-index-postgresql
           supports: quarkus
-          version: '1.33.0'
+          version: '1.34.0'
         referencePolicy:
           type: Local
         from:
           kind: DockerImage
-          name: registry.redhat.io/openshift-serverless-1/logic-data-index-postgresql-rhel8:1.33.0
+          name: registry.redhat.io/openshift-serverless-1/logic-data-index-postgresql-rhel8:1.34.0
   - kind: ImageStream
     apiVersion: v1
     metadata:
@@ -75,18 +75,18 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-      - name: '1.33.0'
+      - name: '1.34.0'
         annotations:
           description: Red Hat build of Runtime image for SonataFlow in memory Jobs Service
           iconClass: icon-jbpm
           tags: logic-jobs-service,sonataflow,jobs-service,jobs-service-ephemeral
           supports: quarkus
-          version: '1.33.0'
+          version: '1.34.0'
         referencePolicy:
           type: Local
         from:
           kind: DockerImage
-          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-ephemeral-rhel8:1.33.0
+          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-ephemeral-rhel8:1.34.0
   - kind: ImageStream
     apiVersion: v1
     metadata:
@@ -96,18 +96,18 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-      - name: '1.33.0'
+      - name: '1.34.0'
         annotations:
           description: Red Hat build of Runtime image for SonataFlow Jobs Service based on Postgresql
           iconClass: icon-jbpm
           tags: logic-jobs-service,sonataflow,jobs-service,jobs-service-postgresql
           supports: quarkus
-          version: '1.33.0'
+          version: '1.34.0'
         referencePolicy:
           type: Local
         from:
           kind: DockerImage
-          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-postgresql-rhel8:1.33.0
+          name: registry.redhat.io/openshift-serverless-1/logic-jobs-service-postgresql-rhel8:1.34.0
   - kind: ImageStream
     apiVersion: v1
     metadata:
@@ -117,18 +117,18 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-        - name: '1.33.0'
+        - name: '1.34.0'
           annotations:
             description: Red Hat build of SonataFlow development mode image with Quarkus extensions libraries preinstalled.
             iconClass: icon-jbpm
             tags: logic,devmode,sonataflow,development,serverless,workflow
             supports: quarkus
-            version: '1.33.0'
+            version: '1.34.0'
           referencePolicy:
             type: Local
           from:
             kind: DockerImage
-            name: registry.redhat.io/openshift-serverless-1/logic-swf-devmode-rhel8:1.33.0
+            name: registry.redhat.io/openshift-serverless-1/logic-swf-devmode-rhel8:1.34.0
   - kind: ImageStream
     apiVersion: v1
     metadata:
@@ -138,15 +138,15 @@ items:
         openshift.io/provider-display-name: Kie Group
     spec:
       tags:
-        - name: '1.33.0'
+        - name: '1.34.0'
           annotations:
             description: Red Hat build of Runtime image for SonataFlow builder with Quarkus extensions libraries preinstalled
             iconClass: icon-jbpm
             tags: logic,builder,sonataflow,workflow,serverless
             supports: quarkus
-            version: '1.33.0'
+            version: '1.34.0'
           referencePolicy:
             type: Local
           from:
             kind: DockerImage
-            name: registry.redhat.io/openshift-serverless-1/logic-swf-builder-rhel8:1.33.0
+            name: registry.redhat.io/openshift-serverless-1/logic-swf-builder-rhel8:1.34.0
