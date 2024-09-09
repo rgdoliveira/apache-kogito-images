@@ -28,7 +28,7 @@
         <build.quarkusapp.argument.imagename.devmode>kogito-swf-devmode</build.quarkusapp.argument.imagename.devmode>
         <build.quarkusapp.argument.imagename.builder>kogito-swf-builder</build.quarkusapp.argument.imagename.builder>
         <build.quarkusapp.argument.quarkusplatform.groupid>io.quarkus.platform</build.quarkusapp.argument.quarkusplatform.groupid>
-        <build.quarkusapp.argument.quarkusplatform.version>3.8.4</build.quarkusapp.argument.quarkusplatform.version>
+        <build.quarkusapp.argument.quarkusplatform.version>3.8.6</build.quarkusapp.argument.quarkusplatform.version>
         <build.quarkusapp.argument.kogitoversion>999-SNAPSHOT</build.quarkusapp.argument.kogitoversion>
     </properties>
 
